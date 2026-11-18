@@ -1,6 +1,9 @@
 __pycache__/
 *.pyc
-data/
+# Datos en bruto: no se suben (el zip de Laboro pesa 1,6 GB; ver data/README.md)
+data/raw/
+datasets/
+*.zip
 weights/
 runs/
 capturas/

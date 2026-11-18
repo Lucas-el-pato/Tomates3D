@@ -1,0 +1,10 @@
+{
+ "nombre": "modelo2_yolo11s_lr0.0005",
+ "modelo_base": "yolo11s-seg.pt",
+ "lr0": 0.0005,
+ "epochs": 100,
+ "imgsz": 640,
+ "batch": 16,
+ "epocas_corridas": 100,
+ "horas_entrenamiento": 0.58
+}

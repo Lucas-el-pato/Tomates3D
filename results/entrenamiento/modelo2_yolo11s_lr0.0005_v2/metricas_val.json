@@ -1,0 +1,20 @@
+{
+ "modelo": "modelo2_yolo11s_lr0.0005",
+ "arquitectura": "yolo11s-seg",
+ "lr0": 0.0005,
+ "split": "val",
+ "precision_mascara": 0.9320703680632435,
+ "recall_mascara": 0.8850931677018633,
+ "f1_mascara": 0.9079745420301857,
+ "mAP50_mascara": 0.957644869687983,
+ "mAP50-95_mascara": 0.8197261255247776,
+ "precision_caja": 0.9348120224858361,
+ "recall_caja": 0.8907004683795678,
+ "f1_caja": 0.9122232912032988,
+ "mAP50_caja": 0.9670600264771738,
+ "mAP50-95_caja": 0.8753930481730293,
+ "ms_por_imagen": 9.570330416664774,
+ "parametros_M": 10.082675,
+ "mejor_epoca": 57,
+ "horas_entrenamiento": 0.53
+}

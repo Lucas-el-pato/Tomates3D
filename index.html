@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tomates 3D · Lucas Garcia y Danis Gonzalez</title>
+<meta name="description" content="Detección y localización 3D de tomates con visión estéreo e IA. Proyecto de Inteligencia Artificial, Ingeniería Mecatrónica, FIUNA.">
+<style>
+  :root {
+    --bg: #fbfaf8; --surface: #ffffff; --text: #1f1d1b; --muted: #6b6560; --line: #e7e2dc;
+    --accent: #c0392b; --accent-soft: #fbe9e7; --chip: #f3efe9; --radius: 14px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #151413; --surface: #1e1c1a; --text: #f1ede8; --muted: #a8a19a; --line: #34302c;
+      --accent: #ef6b5b; --accent-soft: #3a211d; --chip: #2a2724;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  a { color: var(--accent); }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+  nav { position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  nav .wrap { display: flex; gap: 18px; align-items: center; height: 56px; overflow-x: auto; white-space: nowrap; }
+  nav b { margin-right: auto; }
+  nav a { color: var(--muted); text-decoration: none; font-size: 15px; }
+  nav a:hover { color: var(--text); }
+  header { padding: 56px 0 24px; }
+  h1 { font-size: clamp(30px, 5vw, 46px); line-height: 1.1; margin: 0 0 12px; letter-spacing: -0.02em; }
+  h2 { font-size: 26px; margin: 0 0 18px; letter-spacing: -0.01em; }
+  h3 { margin: 0 0 6px; font-size: 18px; }
+  .lead { font-size: 18px; color: var(--muted); max-width: 720px; margin: 0; }
+  section { padding: 40px 0; border-top: 1px solid var(--line); }
+  .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; }
+  .perfil { display: flex; gap: 18px; align-items: center; }
+  .foto { width: 96px; height: 96px; border-radius: 50%; flex: none; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); font-weight: 700; font-size: 30px; overflow: hidden; }
+  .foto img { width: 100%; height: 100%; object-fit: cover; }
+  .rol { color: var(--muted); margin: 0; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 0; list-style: none; }
+  .chips li { background: var(--chip); border-radius: 999px; padding: 5px 12px; font-size: 14px; }
+  .skills h3 { font-size: 15px; color: var(--muted); font-weight: 600; margin: 14px 0 8px; }
+  .edu { display: grid; grid-template-columns: 120px 1fr; gap: 6px 18px; }
+  .edu .año { color: var(--muted); }
+  .proyecto-hero { display: grid; grid-template-columns: 1.1fr 1fr; gap: 26px; align-items: center; }
+  @media (max-width: 760px) { .proyecto-hero { grid-template-columns: 1fr; } .edu { grid-template-columns: 1fr; } }
+  figure { margin: 0; }
+  figure img { width: 100%; height: auto; display: block; border-radius: 10px; border: 1px solid var(--line); background: #fff; }
+  figcaption { font-size: 13px; color: var(--muted); margin-top: 6px; }
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 22px 0; }
+  .kpi { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
+  .kpi b { display: block; font-size: 26px; color: var(--accent); font-variant-numeric: tabular-nums; }
+  .kpi span { font-size: 14px; color: var(--muted); }
+  table { width: 100%; border-collapse: collapse; font-size: 15px; font-variant-numeric: tabular-nums; }
+  th, td { padding: 9px 10px; border-bottom: 1px solid var(--line); text-align: left; }
+  th { font-size: 13px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em; }
+  .tabla { overflow-x: auto; }
+  .boton { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: #fff; text-decoration: none; padding: 10px 18px; border-radius: 10px; font-weight: 600; }
+  .contacto a { display: block; margin: 4px 0; }
+  .pendiente { color: var(--muted); font-style: italic; }
+  footer { padding: 30px 0 50px; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <b>Tomates 3D</b>
+  <a href="#perfiles">Perfiles</a><a href="#habilidades">Habilidades</a><a href="#educacion">Educación</a>
+  <a href="#proyecto">Proyecto</a><a href="#contacto">Contacto</a>
+</div></nav>
+
+<main class="wrap">
+  <header>
+    <h1>Lucas Garcia · Danis Gonzalez</h1>
+    <p class="lead">Estudiantes de Ingeniería Mecatrónica (9.º semestre) de la Facultad de Ingeniería de la Universidad Nacional de Asunción. Trabajamos en la intersección entre robótica, visión por computadora e inteligencia artificial: sistemas que perciben su entorno y le dan a una máquina la información que necesita para actuar.</p>
+  </header>
+
+  <section id="perfiles">
+    <h2>Perfiles</h2>
+    <div class="grid2">
+      <article class="card">
+        <div class="perfil">
+          <div class="foto" aria-label="Foto de Lucas Garcia">LG<!-- reemplazar por <img src="assets/foto_lucas.jpg" alt="Lucas Garcia"> --></div>
+          <div>
+            <h3>Lucas Garcia</h3>
+            <p class="rol">Estudiante de Ingeniería Mecatrónica · FIUNA</p>
+          </div>
+        </div>
+        <p>[Breve introducción: intereses, áreas de especialización y experiencia de Lucas.]</p>
+      </article>
+      <article class="card">
+        <div class="perfil">
+          <div class="foto" aria-label="Foto de Danis Gonzalez">DG<!-- reemplazar por <img src="assets/foto_danis.jpg" alt="Danis Gonzalez"> --></div>
+          <div>
+            <h3>Danis Gonzalez</h3>
+            <p class="rol">Estudiante de Ingeniería Mecatrónica · FIUNA</p>
+          </div>
+        </div>
+        <p>[Breve introducción: intereses, áreas de especialización y experiencia de Danis.]</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="habilidades" class="skills">
+    <h2>Habilidades</h2>
+    <h3>Inteligencia artificial y visión</h3>
+    <ul class="chips"><li>Deep Learning</li><li>Segmentación de instancias</li><li>YOLO11 (Ultralytics)</li><li>PyTorch</li><li>Transfer learning / fine-tuning</li><li>OpenCV</li><li>Visión estéreo</li><li>Calibración de cámaras</li></ul>
+    <h3>Programación y datos</h3>
+    <ul class="chips"><li>Python</li><li>NumPy</li><li>Pandas</li><li>Matplotlib</li><li>Jupyter / Google Colab</li><li>FastAPI</li><li>WebSockets</li><li>HTML / JavaScript</li></ul>
+    <h3>Herramientas e ingeniería</h3>
+    <ul class="chips"><li>Git / GitHub</li><li>Robótica</li><li>Sistemas embebidos</li><li>Control</li><li>Diseño mecánico</li></ul>
+  </section>
+
+  <section id="educacion">
+    <h2>Educación</h2>
+    <div class="card edu">
+      <span class="año">2021 – actualidad</span>
+      <div><b>Ingeniería Mecatrónica</b> (9.º semestre) — Facultad de Ingeniería, Universidad Nacional de Asunción (FIUNA), Paraguay.</div>
+      <span class="año">2026</span>
+      <div><b>Inteligencia Artificial</b> — trabajo práctico final: <a href="#proyecto">Tomates 3D</a>.</div>
+    </div>
+  </section>
+
+  <section id="proyecto">
+    <h2>Proyecto de IA: Tomates 3D</h2>
+    <div class="proyecto-hero">
+      <div>
+        <h3>Detección y localización 3D de tomates con visión estéreo e IA</h3>
+        <p>Un sistema que encuentra tomates maduros y semimaduros en una imagen y calcula su posición en el espacio (X, Y, Z, en metros) con <b>dos webcams</b>. Esa información es la que necesita un brazo robótico para cosechar. Todo funciona desde una página web: calibración de las cámaras, detección por imagen y detección en vivo.</p>
+        <p><a class="boton" href="https://github.com/Lucas-el-pato/Tomates3D">Ver el repositorio en GitHub →</a></p>
+      </div>
+      <figure>
+        <img src="assets/real_comparacion.jpg" alt="Tomate sostenido por la pinza de un brazo robótico, segmentado por YOLO11 y por OpenCV" loading="lazy">
+        <figcaption>Prueba real: tomate a 47 cm sobre el brazo robótico. Izquierda: YOLO11m-seg. Derecha: OpenCV.</figcaption>
+      </figure>
+    </div>
+
+    <div class="kpis">
+      <div class="kpi"><b>0,766</b><span>mAP50-95 de máscara en test (M3)</span></div>
+      <div class="kpi"><b>0,891</b><span>F1 de máscara en test (M3)</span></div>
+      <div class="kpi"><b>47,8 cm</b><span>medidos para 47 cm reales (±0,2 mm)</span></div>
+      <div class="kpi"><b>0,37 px</b><span>error RMS de la calibración estéreo</span></div>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <h3>Dataset</h3>
+        <p><b>Laboro Tomato</b>: 804 fotos reales de invernadero con máscaras por fruto. Los tomates maduros y semimaduros se unieron en una clase (3327 instancias); los verdes quedan como fondo (6450). Partición 547 / 96 / 161 (train / val / test) sin fuga de datos.</p>
+      </div>
+      <div class="card">
+        <h3>Modelo</h3>
+        <p><b>YOLO11-seg</b> preentrenado en COCO y ajustado (fine-tuning) con Laboro Tomato, optimizado con AdamW. Se compara con un detector clásico de OpenCV (color HSV + watershed). La profundidad se calcula con visión estéreo calibrada: Z = f·B/d.</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:28px">Búsqueda de hiperparámetros</h3>
+    <p>Búsqueda manual, una variable por vez: primero el learning rate, después el tamaño del modelo con el mejor learning rate (elegido en validación), y por último la definición de la clase. En total, 6 entrenamientos de 100 épocas en una GPU T4.</p>
+    <div class="tabla card">
+      <table>
+        <thead><tr><th>Modelo</th><th>Arquitectura</th><th>Learning rate</th><th>Parámetros</th><th>mAP50-95 (máscara, test)</th><th>ms/img (T4)</th></tr></thead>
+        <tbody>
+          <tr><td>M1</td><td>yolo11s-seg</td><td>0,002</td><td>10,1 M</td><td>0,753</td><td>10,0</td></tr>
+          <tr><td>M2</td><td>yolo11s-seg</td><td>0,0005</td><td>10,1 M</td><td>0,759</td><td>9,5</td></tr>
+          <tr><td><b>M3</b></td><td>yolo11m-seg</td><td>0,0005</td><td>22,4 M</td><td><b>0,766</b></td><td>25,7</td></tr>
+          <tr><td>OpenCV</td><td>HSV + watershed</td><td>—</td><td>0</td><td>—</td><td>78 (CPU)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid2" style="margin-top:20px">
+      <figure>
+        <img src="assets/diag_sistema.png" alt="Diagrama del sistema: cámaras, API, rectificación, YOLO u OpenCV, emparejamiento de máscaras y triangulación" loading="lazy">
+        <figcaption>Arquitectura del sistema.</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/metricas_test.png" alt="Gráfico de barras de precisión, recall, F1, mAP50 y mAP50-95 de los tres modelos" loading="lazy">
+        <figcaption>Métricas de máscara de los tres modelos en test.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="contacto" class="contacto">
+    <h2>Contacto</h2>
+    <div class="grid2">
+      <div class="card">
+        <h3>Lucas Garcia</h3>
+        <a href="https://github.com/Lucas-el-pato">GitHub: Lucas-el-pato</a>
+        <a href="mailto:lucas.garcia@fiuna.edu.py">lucas.garcia@fiuna.edu.py</a>
+      </div>
+      <div class="card">
+        <h3>Danis Gonzalez</h3>
+        <a href="https://github.com/Danis1402">GitHub: Danis1402</a>
+        <a href="mailto:danis.gonzalez@fiuna.edu.py">danis.gonzalez@fiuna.edu.py</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">Tomates 3D · Trabajo práctico de Inteligencia Artificial · FIUNA · 2026</div></footer>
+</body>
+</html>
